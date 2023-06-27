@@ -22,6 +22,12 @@ pubspec.lock
 .flutter-plugins
 .flutter-plugins-dependencies
 
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
 # Visual Studio Code related
 .classpath
 .project
