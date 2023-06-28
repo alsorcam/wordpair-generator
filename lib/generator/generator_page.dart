@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:wordpair_generator/main.dart';
-import 'package:wordpair_generator/history_list.dart';
+import 'package:wordpair_generator/generator/history_list.dart';
 
 class GeneratorPage extends StatelessWidget {
   @override

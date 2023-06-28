@@ -2,8 +2,8 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:wordpair_generator/favorites.dart';
-import 'package:wordpair_generator/generator.dart';
+import 'package:wordpair_generator/favorites/favorites.dart';
+import 'package:wordpair_generator/generator/generator.dart';
 
 void main() {
   runApp(WordpairGeneratorApp());
