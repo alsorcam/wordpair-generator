@@ -8,7 +8,7 @@ import 'package:wordpair_generator/history_list.dart';
 class GeneratorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
+    var appState = context.watch<WordpairGeneratorAppState>();
     var pair = appState.current;
 
     IconData icon;

@@ -11,7 +11,7 @@ class HistoryListView extends StatefulWidget {
 }
 
 class _HistoryListViewState extends State<HistoryListView> {
-  /// Needed so that [MyAppState] can tell [AnimatedList] below to animate
+  /// Needed so that [WordpairGeneratorAppState] can tell [AnimatedList] below to animate
   /// new items.
   final _key = GlobalKey();
 
@@ -27,7 +27,7 @@ class _HistoryListViewState extends State<HistoryListView> {
 
   @override
   Widget build(BuildContext context) {
-    final appState = context.watch<MyAppState>();
+    final appState = context.watch<WordpairGeneratorAppState>();
     appState.historyListKey = _key;
 
     return ShaderMask(
