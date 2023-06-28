@@ -6,16 +6,16 @@ import 'package:wordpair_generator/favorites.dart';
 import 'package:wordpair_generator/generator.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(WordpairGeneratorApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class WordpairGeneratorApp extends StatelessWidget {
+  const WordpairGeneratorApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => MyAppState(),
+      create: (context) => WordpairGeneratorAppState(),
       child: MaterialApp(
         title: 'Wordpair Generator',
         theme: ThemeData(
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyAppState extends ChangeNotifier {
+class WordpairGeneratorAppState extends ChangeNotifier {
   var current = WordPair.random();
   var favorites = <WordPair>[];
 

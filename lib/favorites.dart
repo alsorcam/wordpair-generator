@@ -10,7 +10,7 @@ class FavoritesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
+    var appState = context.watch<WordpairGeneratorAppState>();
     var favorites = appState.favorites;
 
     final theme = Theme.of(context);
