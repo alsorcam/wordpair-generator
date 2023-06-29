@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import 'package:wordpair_generator/main.dart';
 
 class HistoryListView extends StatefulWidget {
   const HistoryListView({Key? key}) : super(key: key);
@@ -27,8 +24,11 @@ class _HistoryListViewState extends State<HistoryListView> {
 
   @override
   Widget build(BuildContext context) {
-    final appState = context.watch<WordpairGeneratorAppState>();
-    appState.historyListKey = _key;
+    // TODO: Get state
+    // final appState = context.watch<WordpairGeneratorAppState>();
+    // appState.historyListKey = _key;
+    var history = [];
+    var favorites = [];
 
     return ShaderMask(
       shaderCallback: (bounds) => _maskingGradient.createShader(bounds),
@@ -39,17 +39,18 @@ class _HistoryListViewState extends State<HistoryListView> {
         key: _key,
         reverse: false,
         // padding: EdgeInsets.only(top: 100),
-        initialItemCount: appState.history.length,
+        initialItemCount: history.length,
         itemBuilder: (context, index, animation) {
-          final pair = appState.history[index];
+          final pair = history[index];
           return SizeTransition(
             sizeFactor: animation,
             child: Center(
               child: TextButton.icon(
                 onPressed: () {
-                  appState.toggleFavorite(pair);
+                  // TODO: Toggle favorite
+                  // toggleFavorite(pair);
                 },
-                icon: appState.favorites.contains(pair)
+                icon: favorites.contains(pair)
                     ? Icon(Icons.favorite, size: 12)
                     : SizedBox(),
                 label: Text(

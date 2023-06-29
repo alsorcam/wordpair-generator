@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import 'package:wordpair_generator/main.dart';
 
 class FavoritesPage extends StatelessWidget {
   const FavoritesPage({
@@ -10,8 +7,10 @@ class FavoritesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<WordpairGeneratorAppState>();
-    var favorites = appState.favorites;
+    // TODO: Get favorites state
+    // var appState = context.watch<WordpairGeneratorAppState>();
+    // var favorites = appState.favorites;
+    var favorites = [];
 
     final theme = Theme.of(context);
     final headlineStyle = theme.textTheme.displayMedium!.copyWith(
