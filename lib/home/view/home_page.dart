@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:wordpair_generator/favorites/favorites.dart';
 import 'package:wordpair_generator/generator/generator.dart';
+import 'package:wordpair_generator/home/home.dart';
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => HomeCubit(),
+      child: const HomeView(),
+    );
+  }
+}
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Read selected index from state
-    const selectedIndex = 0;
+    final selectedIndex = context.select((HomeCubit cubit) => cubit.state);
 
     Widget page;
     switch (selectedIndex) {
@@ -20,7 +33,7 @@ class HomeView extends StatelessWidget {
         page = FavoritesPage();
         break;
       default:
-        throw UnimplementedError('no widget for $selectedIndex');
+        throw UnimplementedError('No page for $selectedIndex');
     }
 
     return LayoutBuilder(builder: (context, constraints) {
@@ -42,10 +55,7 @@ class HomeView extends StatelessWidget {
                 ],
                 selectedIndex: selectedIndex,
                 onDestinationSelected: (value) {
-                  // TODO: Set state for page index
-                  // setState(() {
-                  //   selectedIndex = value;
-                  // });
+                  context.read<HomeCubit>().setTab(value);
                 },
               ),
             ),

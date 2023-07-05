@@ -29,7 +29,7 @@ class WordpairGeneratorView extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
       ),
-      home: HomeView(),
+      home: HomePage(),
     );
   }
 }
