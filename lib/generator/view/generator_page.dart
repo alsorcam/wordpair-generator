@@ -3,12 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:wordpair_generator/generator/bloc/generator_bloc.dart';
 import 'package:wordpair_generator/generator/widgets/widgets.dart';
+import 'package:wordpair_generator/repository/repository.dart';
 
 class GeneratorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GeneratorBloc(),
+      create: (context) => GeneratorBloc(
+          favoritesRepository: context.read<FavoritesRepository>())
+        ..add(LoadFavorites()),
       child: const GeneratorView(),
     );
   }
