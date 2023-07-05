@@ -12,21 +12,22 @@ import 'package:wordpair_generator/repository/repository.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final favoritesStorage = LocalStorageFavorites(
+  final favoritesRepository = FavoritesRepository(
+      favoritesStorage: LocalStorageFavorites(
     plugin: await SharedPreferences.getInstance(),
-  );
+  ));
 
-  bootstrap(favoritesStorage: favoritesStorage);
-}
+  final historyRepository = HistoryRepository(
+      historyStorage: LocalStorageHistory(
+    plugin: await SharedPreferences.getInstance(),
+  ));
 
-void bootstrap({required LocalStorageFavorites favoritesStorage}) {
   Bloc.observer = const WordpairGeneratorObserver();
-  final favoritesRepository =
-      FavoritesRepository(favoritesStorage: favoritesStorage);
 
   runZonedGuarded(
-    () =>
-        runApp(WordpairGeneratorApp(favoritesRepository: favoritesRepository)),
+    () => runApp(WordpairGeneratorApp(
+        favoritesRepository: favoritesRepository,
+        historyRepository: historyRepository)),
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }

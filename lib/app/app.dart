@@ -5,14 +5,25 @@ import 'package:wordpair_generator/home/home.dart';
 import 'package:wordpair_generator/repository/repository.dart';
 
 class WordpairGeneratorApp extends StatelessWidget {
-  const WordpairGeneratorApp({required this.favoritesRepository, super.key});
+  const WordpairGeneratorApp(
+      {required this.favoritesRepository,
+      required this.historyRepository,
+      super.key});
 
   final FavoritesRepository favoritesRepository;
+  final HistoryRepository historyRepository;
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: favoritesRepository,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider.value(
+          value: favoritesRepository,
+        ),
+        RepositoryProvider.value(
+          value: historyRepository,
+        ),
+      ],
       child: const WordpairGeneratorView(),
     );
   }
