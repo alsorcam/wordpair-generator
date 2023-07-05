@@ -5,7 +5,7 @@ sealed class GeneratorEvent extends Equatable {
   const GeneratorEvent();
 }
 
-class LoadGenerator extends GeneratorEvent {
+class LoadFavorites extends GeneratorEvent {
   @override
   List<Object> get props => [];
 }
