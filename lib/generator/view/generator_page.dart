@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:wordpair_generator/generator/bloc/generator_bloc.dart';
 import 'package:wordpair_generator/generator/widgets/widgets.dart';
+import 'package:wordpair_generator/history/history.dart';
 import 'package:wordpair_generator/repository/repository.dart';
 
 class GeneratorPage extends StatelessWidget {
@@ -10,6 +11,7 @@ class GeneratorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => GeneratorBloc(
+          historyRepository: context.read<HistoryRepository>(),
           favoritesRepository: context.read<FavoritesRepository>())
         ..add(LoadFavorites()),
       child: const GeneratorView(),
@@ -43,17 +45,9 @@ class GeneratorView extends StatelessWidget {
             children: [
               ElevatedButton.icon(
                 onPressed: () {
-                  bool isInFavorites =
-                      state.favorites.contains(state.currentWordpair);
-                  if (isInFavorites == true) {
-                    context
-                        .read<GeneratorBloc>()
-                        .add(RemoveFavorite(state.currentWordpair));
-                  } else {
-                    context
-                        .read<GeneratorBloc>()
-                        .add(AddFavorite(state.currentWordpair));
-                  }
+                  context
+                      .read<GeneratorBloc>()
+                      .add(ToggleLike(state.currentWordpair));
                 },
                 icon: Icon(icon),
                 label: Text('Like'),
@@ -67,12 +61,11 @@ class GeneratorView extends StatelessWidget {
               ),
             ],
           ),
-          // TODO: Show history
-          // SizedBox(height: 10),
-          // Expanded(
-          //   flex: 2,
-          //   child: HistoryListView(),
-          // ),
+          SizedBox(height: 10),
+          Expanded(
+            flex: 2,
+            child: HistoryListView(),
+          ),
         ]));
       },
     );

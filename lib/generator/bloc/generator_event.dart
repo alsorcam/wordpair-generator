@@ -15,19 +15,10 @@ class GenerateWordpair extends GeneratorEvent {
   List<Object> get props => [];
 }
 
-class AddFavorite extends GeneratorEvent {
+class ToggleLike extends GeneratorEvent {
   final WordPair wordpair;
 
-  const AddFavorite(this.wordpair);
-
-  @override
-  List<Object> get props => [wordpair];
-}
-
-class RemoveFavorite extends GeneratorEvent {
-  final WordPair wordpair;
-
-  const RemoveFavorite(this.wordpair);
+  const ToggleLike(this.wordpair);
 
   @override
   List<Object> get props => [wordpair];

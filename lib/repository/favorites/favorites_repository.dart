@@ -11,12 +11,6 @@ class FavoritesRepository {
 
   Stream<List<WordPair>> getFavorites() => _favoritesStorage.getFavorites();
 
-  Future<void> addFavorite(WordPair wordpair) =>
-      _favoritesStorage.addFavorite(wordpair);
-
-  Future<void> removeFavorite(WordPair wordpair) =>
-      _favoritesStorage.removeFavorite(wordpair);
-
   Future<void> toggleFavorite(WordPair wordpair) =>
       _favoritesStorage.toggleFavorite(wordpair);
 }

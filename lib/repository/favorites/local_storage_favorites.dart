@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:english_words/english_words.dart';
 import 'package:rxdart/subjects.dart';
@@ -29,29 +28,19 @@ class LocalStorageFavorites {
       _plugin.setString(key, value);
 
   void _init() {
-    // final favoritesJson = _getValue(kFavoritesCollectionKey);
-    // if (favoritesJson != null) {
-    //   log("FAVORITES: ${json.decode(favoritesJson)}");
-    // final favorites = List<Map<dynamic, dynamic>>.from(
-    //   json.decode(favoritesJson) as List,
-    // )
-    //     .map((jsonMap) => Todo.fromJson(Map<String, dynamic>.from(jsonMap)))
-    //     .toList();
-    // _favoritesStreamController.add(favorites);
-    // } else {}
     _favoritesStreamController.add(const []);
   }
 
   Stream<List<WordPair>> getFavorites() =>
       _favoritesStreamController.asBroadcastStream();
 
-  Future<void> addFavorite(WordPair wordpair) {
+  Future<void> _addFavorite(WordPair wordpair) {
     final favorites = [..._favoritesStreamController.value, wordpair];
     _favoritesStreamController.add(favorites);
     return _setValue(kFavoritesCollectionKey, json.encode(favorites));
   }
 
-  Future<void> removeFavorite(WordPair wordpair) {
+  Future<void> _removeFavorite(WordPair wordpair) {
     final favorites = [..._favoritesStreamController.value..remove(wordpair)];
     _favoritesStreamController.add(favorites);
     return _setValue(kFavoritesCollectionKey, json.encode(favorites));
@@ -60,9 +49,9 @@ class LocalStorageFavorites {
   Future<void> toggleFavorite(WordPair wordpair) {
     bool isInFavorites = _favoritesStreamController.value.contains(wordpair);
     if (isInFavorites) {
-      return removeFavorite(wordpair);
+      return _removeFavorite(wordpair);
     } else {
-      return addFavorite(wordpair);
+      return _addFavorite(wordpair);
     }
   }
 }
