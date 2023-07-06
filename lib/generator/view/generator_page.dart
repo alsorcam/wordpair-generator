@@ -1,9 +1,9 @@
+import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:wordpair_generator/generator/bloc/generator_bloc.dart';
 import 'package:wordpair_generator/generator/widgets/widgets.dart';
-import 'package:wordpair_generator/history/history.dart';
 import 'package:wordpair_generator/repository/repository.dart';
 
 class GeneratorPage extends StatelessWidget {
@@ -13,7 +13,7 @@ class GeneratorPage extends StatelessWidget {
       create: (context) => GeneratorBloc(
           historyRepository: context.read<HistoryRepository>(),
           favoritesRepository: context.read<FavoritesRepository>())
-        ..add(LoadFavorites()),
+        ..add(InitGenerator()),
       child: const GeneratorView(),
     );
   }
@@ -63,9 +63,14 @@ class GeneratorView extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Expanded(
-            flex: 2,
-            child: HistoryListView(),
-          ),
+              flex: 2,
+              child: HistoryListView(
+                  favorites: state.favorites,
+                  history: state.history,
+                  toggleFavorite: (WordPair pair) {
+                    print("Toggle favorite: $pair");
+                    context.read<GeneratorBloc>().add(ToggleLike(pair));
+                  })),
         ]));
       },
     );
