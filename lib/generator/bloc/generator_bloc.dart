@@ -41,6 +41,8 @@ class GeneratorBloc extends Bloc<GeneratorEvent, GeneratorState> {
 
   Future<void> _toggleFavorite(
       ToggleLike event, Emitter<GeneratorState> emit) async {
+    // NOTE: THis shouldn't work like that, but it does
+    emit(state.copyWith(favorites: [...state.favorites, event.wordpair]));
     await _favoritesRepository.toggleFavorite(event.wordpair);
   }
 }
