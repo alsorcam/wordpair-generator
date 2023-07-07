@@ -2,13 +2,16 @@
 
 A Flutter project that generates a random wordpair and allows it to be added to a favorites list.
 
-## Getting Started
+- This project is a starting point for a Flutter application based on [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab).
+- [bloc](https://github.com/felangel/bloc/) and [flutter_bloc](https://pub.dev/packages/flutter_bloc) have been used for state management.
 
-This project is a starting point for a Flutter application based on [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab).
+## Getting started
 
-Furthermore, [bloc](https://github.com/felangel/bloc/) and [flutter_bloc](https://pub.dev/packages/flutter_bloc) have been used for state management.
+To start the application run:
 
-Run `flutter run` to start the application.
+```
+flutter run
+```
 
 ## Project structure
 
@@ -69,3 +72,17 @@ Furthermore, the current word can be added to the favorites list. That action ca
 This page shows the list of favorite words so far.
 To have access to this list from diferent pages (and blocs), the favorites list is stored in a local storage.
 To be able to use this local storage, a repository has been implemented and it can be passed down in the constructor of the blocs that need it.
+
+## Widgetbook
+
+To update the directories of the widgets whose use cases need to be displayed in widgetbook, run:
+
+```
+dart run build_runner build
+```
+
+Afterwards, start widgetbook with:
+
+```
+flutter run -t lib/widgetbook.dart
+```

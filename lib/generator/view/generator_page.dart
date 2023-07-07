@@ -55,7 +55,7 @@ class GeneratorPage extends StatelessWidget {
               child: HistoryListView(
                   favorites: favorites,
                   history: history,
-                  toggleFavorite: (WordPair pair) {
+                  wordClick: (WordPair pair) {
                     toggleFavorite(pair);
                   })),
         ]));

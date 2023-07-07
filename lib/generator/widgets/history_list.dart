@@ -6,7 +6,7 @@ class HistoryListView extends StatelessWidget {
       {Key? key,
       required this.favorites,
       required this.history,
-      required this.toggleFavorite})
+      required this.wordClick})
       : super(key: key);
 
   /// Needed so that [WordpairGeneratorAppState] can tell [AnimatedList] below to animate
@@ -16,7 +16,7 @@ class HistoryListView extends StatelessWidget {
   // Fields that will be managed from the parent component
   final List<WordPair> favorites;
   final List<WordPair> history;
-  final Function toggleFavorite;
+  final Function wordClick;
 
   /// Used to "fade out" the history items at the top, to suggest continuation.
   static const Gradient _maskingGradient = LinearGradient(
@@ -46,7 +46,7 @@ class HistoryListView extends StatelessWidget {
             child: Center(
               child: TextButton.icon(
                 onPressed: () {
-                  toggleFavorite(pair);
+                  wordClick(pair);
                 },
                 icon: favorites.contains(pair)
                     ? Icon(Icons.favorite, size: 12)
