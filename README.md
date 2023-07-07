@@ -12,6 +12,7 @@ Run `flutter run` to start the application.
 
 ## Project structure
 
+```
 ├── lib
 | ├── app
 │ │ ├── app.dart
@@ -49,6 +50,7 @@ Run `flutter run` to start the application.
 │ │ ├── repository.dart\*
 │ └── main.dart
 ├── pubspec.yaml
+```
 
 The application uses a page-driven directory structure. This project structure enables us to scale the project by having self-contained pages. In this example we will have "three" pages and they're split up into folders with barrel files, indicated by the asterisk (\*).
 
