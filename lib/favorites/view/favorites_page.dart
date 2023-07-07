@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:wordpair_generator/favorites/favorites.dart';
 
@@ -18,7 +19,7 @@ class FavoritesPage extends StatelessWidget {
       final headline = Padding(
         padding: const EdgeInsets.all(20),
         child: Text(
-          'Favorite words',
+          AppLocalizations.of(context)!.favorites,
           style: headlineStyle,
         ),
       );
@@ -28,7 +29,7 @@ class FavoritesPage extends StatelessWidget {
           child: Column(
             children: [
               headline,
-              Text('No favorites yet.'),
+              Text(AppLocalizations.of(context)!.favorites_empty),
             ],
           ),
         );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:wordpair_generator/favorites/favorites.dart';
 import 'package:wordpair_generator/generator/generator.dart';
@@ -46,11 +47,11 @@ class HomeView extends StatelessWidget {
                 destinations: [
                   NavigationRailDestination(
                     icon: Icon(Icons.home),
-                    label: Text('Home'),
+                    label: Text(AppLocalizations.of(context)!.home),
                   ),
                   NavigationRailDestination(
                     icon: Icon(Icons.favorite),
-                    label: Text('Favorites'),
+                    label: Text(AppLocalizations.of(context)!.favorites),
                   ),
                 ],
                 selectedIndex: selectedIndex,

@@ -1,6 +1,7 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:wordpair_generator/generator/generator.dart';
 
@@ -38,15 +39,14 @@ class GeneratorPage extends StatelessWidget {
                   toggleFavorite(state.currentWordpair);
                 },
                 icon: Icon(icon),
-                label: Text('Like'),
+                label: Text(AppLocalizations.of(context)!.like),
               ),
               SizedBox(width: 10),
               ElevatedButton(
-                onPressed: () {
-                  generateWordpair();
-                },
-                child: Text('Generate'),
-              ),
+                  onPressed: () {
+                    generateWordpair();
+                  },
+                  child: Text(AppLocalizations.of(context)!.generate)),
             ],
           ),
           SizedBox(height: 10),
