@@ -7,13 +7,9 @@ import 'package:wordpair_generator/generator/generator.dart';
 import 'package:wordpair_generator/favorites/favorites.dart';
 
 class WordpairGeneratorApp extends StatelessWidget {
-  const WordpairGeneratorApp(
-      {required this.favoritesRepository,
-      required this.historyRepository,
-      super.key});
+  const WordpairGeneratorApp({required this.favoritesRepository, super.key});
 
   final FavoritesRepository favoritesRepository;
-  final HistoryRepository historyRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +17,8 @@ class WordpairGeneratorApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (_) => GeneratorBloc(
-            historyRepository: historyRepository,
             favoritesRepository: favoritesRepository,
-          )
-            ..add(RequestHistory())
-            ..add(RequestFavorites()),
+          )..add(RequestFavorites()),
         ),
         BlocProvider(
           create: (_) => FavoritesBloc(

@@ -9,28 +9,15 @@ part 'generator_event.dart';
 part 'generator_state.dart';
 
 class GeneratorBloc extends Bloc<GeneratorEvent, GeneratorState> {
-  GeneratorBloc(
-      {required HistoryRepository historyRepository,
-      required FavoritesRepository favoritesRepository})
-      : _historyRepository = historyRepository,
-        _favoritesRepository = favoritesRepository,
+  GeneratorBloc({required FavoritesRepository favoritesRepository})
+      : _favoritesRepository = favoritesRepository,
         super(GeneratorState(currentWordpair: WordPair.random())) {
-    on<RequestHistory>(_requestHistory);
     on<RequestFavorites>(_requestFavorites);
     on<GenerateWordpair>(_generateWordpair);
     on<ToggleLike>(_toggleFavorite);
   }
 
-  final HistoryRepository _historyRepository;
   final FavoritesRepository _favoritesRepository;
-
-  Future<void> _requestHistory(
-      RequestHistory event, Emitter<GeneratorState> emit) async {
-    await emit.forEach<List<WordPair>>(_historyRepository.getHistory(),
-        onData: (history) => state.copyWith(
-              history: history,
-            ));
-  }
 
   Future<void> _requestFavorites(
       RequestFavorites event, Emitter<GeneratorState> emit) async {
@@ -46,7 +33,6 @@ class GeneratorBloc extends Bloc<GeneratorEvent, GeneratorState> {
     emit(state.copyWith(
         currentWordpair: WordPair.random(),
         history: [prevWorpair, ...state.history]));
-    await _historyRepository.addToHistory(prevWorpair);
   }
 
   Future<void> _toggleFavorite(

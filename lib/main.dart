@@ -17,17 +17,11 @@ Future<void> main() async {
     plugin: await SharedPreferences.getInstance(),
   ));
 
-  final historyRepository = HistoryRepository(
-      historyStorage: LocalStorageHistory(
-    plugin: await SharedPreferences.getInstance(),
-  ));
-
   Bloc.observer = const WordpairGeneratorObserver();
 
   runZonedGuarded(
-    () => runApp(WordpairGeneratorApp(
-        favoritesRepository: favoritesRepository,
-        historyRepository: historyRepository)),
+    () =>
+        runApp(WordpairGeneratorApp(favoritesRepository: favoritesRepository)),
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }
