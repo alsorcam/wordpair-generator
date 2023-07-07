@@ -1,26 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wordpair_generator/favorites/bloc/favorites_bloc.dart';
 
-import 'package:wordpair_generator/repository/repository.dart';
+import 'package:wordpair_generator/favorites/favorites.dart';
 
 class FavoritesPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => FavoritesBloc(
-          favoritesRepository: context.read<FavoritesRepository>())
-        ..add(FavoritesLoaded()),
-      child: const FavoritesView(),
-    );
-  }
-}
-
-class FavoritesView extends StatelessWidget {
-  const FavoritesView({
-    super.key,
-  });
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FavoritesBloc, FavoritesState>(

@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:wordpair_generator/home/home.dart';
 import 'package:wordpair_generator/repository/repository.dart';
+import 'package:wordpair_generator/generator/generator.dart';
+import 'package:wordpair_generator/favorites/favorites.dart';
 
 class WordpairGeneratorApp extends StatelessWidget {
   const WordpairGeneratorApp(
@@ -15,14 +17,21 @@ class WordpairGeneratorApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
+    return MultiBlocProvider(
       providers: [
-        RepositoryProvider.value(
-          value: favoritesRepository,
+        BlocProvider(
+          create: (_) => GeneratorBloc(
+            historyRepository: historyRepository,
+            favoritesRepository: favoritesRepository,
+          )
+            ..add(RequestHistory())
+            ..add(RequestFavorites()),
         ),
-        RepositoryProvider.value(
-          value: historyRepository,
-        ),
+        BlocProvider(
+          create: (_) => FavoritesBloc(
+            favoritesRepository: favoritesRepository,
+          )..add(FavoritesLoaded()),
+        )
       ],
       child: const WordpairGeneratorView(),
     );
