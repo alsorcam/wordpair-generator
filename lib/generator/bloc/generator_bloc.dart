@@ -16,7 +16,8 @@ class GeneratorBloc extends Bloc<GeneratorEvent, GeneratorState> {
         _favoritesRepository = favoritesRepository,
         // FIXME: Don't generate a random word if there's already a state
         super(GeneratorState(currentWordpair: WordPair.random())) {
-    on<InitGenerator>(_initGenerator);
+    on<RequestHistory>(_requestHistory);
+    on<RequestFavorites>(_requestFavorites);
     on<GenerateWordpair>(_generateWordpair);
     on<ToggleLike>(_toggleFavorite);
   }
@@ -24,13 +25,16 @@ class GeneratorBloc extends Bloc<GeneratorEvent, GeneratorState> {
   final HistoryRepository _historyRepository;
   final FavoritesRepository _favoritesRepository;
 
-  Future<void> _initGenerator(
-      InitGenerator event, Emitter<GeneratorState> emit) async {
-    // FIXME: Only works for one of them
+  Future<void> _requestHistory(
+      RequestHistory event, Emitter<GeneratorState> emit) async {
     await emit.forEach<List<WordPair>>(_historyRepository.getHistory(),
         onData: (history) => state.copyWith(
               history: history,
             ));
+  }
+
+  Future<void> _requestFavorites(
+      RequestFavorites event, Emitter<GeneratorState> emit) async {
     await emit.forEach<List<WordPair>>(_favoritesRepository.getFavorites(),
         onData: (favorites) => state.copyWith(
               favorites: favorites,

@@ -13,7 +13,8 @@ class GeneratorPage extends StatelessWidget {
       create: (context) => GeneratorBloc(
           historyRepository: context.read<HistoryRepository>(),
           favoritesRepository: context.read<FavoritesRepository>())
-        ..add(InitGenerator()),
+        ..add(RequestHistory())
+        ..add(RequestFavorites()),
       child: const GeneratorView(),
     );
   }
@@ -26,9 +27,16 @@ class GeneratorView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GeneratorBloc, GeneratorState>(
       builder: (context, state) {
-        // FIXME: Toggle icon when deselecting favorite
+        final WordPair currentWordpair = state.currentWordpair;
+        final List<WordPair> favorites = state.favorites;
+        final List<WordPair> history = state.history;
+        toggleFavorite(WordPair pair) =>
+            context.read<GeneratorBloc>().add(ToggleLike(pair));
+        generateWordpair() =>
+            context.read<GeneratorBloc>().add(GenerateWordpair());
+
         IconData icon = Icons.favorite_border;
-        if (state.favorites.contains(state.currentWordpair)) {
+        if (favorites.contains(currentWordpair)) {
           icon = Icons.favorite;
         } else {
           icon = Icons.favorite_border;
@@ -38,16 +46,14 @@ class GeneratorView extends StatelessWidget {
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           SizedBox(height: 50),
-          WordpairCard(pair: state.currentWordpair),
+          WordpairCard(pair: currentWordpair),
           SizedBox(height: 10),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               ElevatedButton.icon(
                 onPressed: () {
-                  context
-                      .read<GeneratorBloc>()
-                      .add(ToggleLike(state.currentWordpair));
+                  toggleFavorite(state.currentWordpair);
                 },
                 icon: Icon(icon),
                 label: Text('Like'),
@@ -55,7 +61,7 @@ class GeneratorView extends StatelessWidget {
               SizedBox(width: 10),
               ElevatedButton(
                 onPressed: () {
-                  context.read<GeneratorBloc>().add(GenerateWordpair());
+                  generateWordpair();
                 },
                 child: Text('Generate'),
               ),
@@ -65,11 +71,10 @@ class GeneratorView extends StatelessWidget {
           Expanded(
               flex: 2,
               child: HistoryListView(
-                  favorites: state.favorites,
-                  history: state.history,
+                  favorites: favorites,
+                  history: history,
                   toggleFavorite: (WordPair pair) {
-                    print("Toggle favorite: $pair");
-                    context.read<GeneratorBloc>().add(ToggleLike(pair));
+                    toggleFavorite(pair);
                   })),
         ]));
       },
