@@ -14,7 +14,6 @@ class GeneratorBloc extends Bloc<GeneratorEvent, GeneratorState> {
       required FavoritesRepository favoritesRepository})
       : _historyRepository = historyRepository,
         _favoritesRepository = favoritesRepository,
-        // FIXME: Don't generate a random word if there's already a state
         super(GeneratorState(currentWordpair: WordPair.random())) {
     on<RequestHistory>(_requestHistory);
     on<RequestFavorites>(_requestFavorites);

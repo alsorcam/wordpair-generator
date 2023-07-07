@@ -2,27 +2,9 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:wordpair_generator/generator/bloc/generator_bloc.dart';
-import 'package:wordpair_generator/generator/widgets/widgets.dart';
-import 'package:wordpair_generator/repository/repository.dart';
+import 'package:wordpair_generator/generator/generator.dart';
 
 class GeneratorPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GeneratorBloc(
-          historyRepository: context.read<HistoryRepository>(),
-          favoritesRepository: context.read<FavoritesRepository>())
-        ..add(RequestHistory())
-        ..add(RequestFavorites()),
-      child: const GeneratorView(),
-    );
-  }
-}
-
-class GeneratorView extends StatelessWidget {
-  const GeneratorView({super.key});
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GeneratorBloc, GeneratorState>(
